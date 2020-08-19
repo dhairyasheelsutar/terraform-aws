@@ -18,9 +18,9 @@ provider "aws" {
 # Setting up backend to store state file
 terraform {
     backend "s3" {
-        bucket             =   "${var.bucket_name}"
-        key                =   "${var.bucket_key_path}"
-        region             =   "${var.region}"
+        bucket             =   "bucket-20942"
+        key                =   "/global/s3/state/"
+        region             =   "us-east-1"
         encrypt            =   true
     }
 }
