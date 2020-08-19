@@ -84,8 +84,7 @@ resource "aws_security_group" "vpc_private_sg" {
     to_port = 3306
     protocol = "tcp"
     cidr_blocks = [
-      "20.0.2.0/24"
-    ]
+      "20.0.2.0/24"]
   }
 
   egress {
