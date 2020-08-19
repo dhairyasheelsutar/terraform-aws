@@ -10,50 +10,51 @@
 
 # Setup our aws provider
 provider "aws" {
-  region = "us-east-1"
+    region = "us-east-1"
 }
 
 # Define a vpc
 resource "aws_vpc" "vpc_name" {
-  cidr_block = "20.0.0.0/16"
-  tags {
-    Name = "vpc-20942"
-  }
+    cidr_block = "20.0.0.0/16"
+    tags {
+        Name = "vpc-20942"
+    }
 }
 
 # Internet gateway for the public subnet
 resource "aws_internet_gateway" "demo_ig" {
-  vpc_id = "${aws_vpc.vpc_name.id}"
-  tags {
-    Name = "igw-20942"
-  }
+    vpc_id = "${aws_vpc.vpc_name.id}"
+    tags {
+        Name = "igw-20942"
+    }
 }
 
 # Public subnet
 resource "aws_subnet" "vpc_public_sn" {
-  vpc_id = "${aws_vpc.vpc_name.id}"
-  cidr_block = "20.0.1.0/24"
-  tags {
-    Name = "pub-20942"
-  }
+    vpc_id = "${aws_vpc.vpc_name.id}"
+    cidr_block = "20.0.1.0/24"
+    tags {
+        Name = "pub-20942"
+    }
 }
 
 # Private subnet 1
 resource "aws_subnet" "vpc_private_sn_1" {
-  vpc_id = "${aws_vpc.vpc_name.id}"
-  cidr_block = "20.0.2.0/24"
-  tags {
-    Name = "pvt-20942-1"
-  }
+    vpc_id = "${aws_vpc.vpc_name.id}"
+    cidr_block = "20.0.2.0/24"
+    tags {
+        Name = "pvt-20942-1"
+    }
 }
 
 # Private subnet 2
 resource "aws_subnet" "vpc_private_sn_2" {
-  vpc_id = "${aws_vpc.vpc_name.id}"
-  cidr_block = "20.0.3.0/24"
-  tags {
-    Name = "pvt-20942-2"
-  }
+    vpc_id = "${aws_vpc.vpc_name.id}"
+    cidr_block = "20.0.3.0/24"
+    tags {
+        Name = "pvt-20942-2"
+    }
+}
 
 # Routing table for public subnet
 resource "aws_route_table" "vpc_public_sn_rt" {
