@@ -49,14 +49,14 @@ module "rds" {
     security_grp_id         =   ["${module.network.security_group_id}"]
 }
 
-module "ec2" {
+module "public_insance" {
     source                  =   "./modules/ec2"
     instance_type           =   "${var.instance_type}"
     subnet_id               =   "${var.subnet_id}"
     security_grp_id         =   ["${module.network.security_group_id}"]
 }
 
-module "ec2" {
+module "private_instance" {
     source                  =   "./modules/ec2"
     instance_type           =   "${var.instance_type}"
     subnet_id               =   "${var.subnet_id}"
