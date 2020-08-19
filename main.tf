@@ -61,6 +61,16 @@ resource "aws_subnet" "vpc_private_sn_2" {
     }
 }
 
+# Private subnet 3
+resource "aws_subnet" "vpc_private_sn_3" {
+    vpc_id = "${aws_vpc.vpc_name.id}"
+    cidr_block = "20.0.4.0/24"
+    availability_zone = "us-east-1d"
+    tags {
+        Name = "pvt-20942-3"
+    }
+}
+
 # Routing table for public subnet
 resource "aws_route_table" "vpc_public_sn_rt" {
     vpc_id = "${aws_vpc.vpc_name.id}"
@@ -109,3 +119,57 @@ resource "aws_security_group" "vpc_private_sg" {
   }
 }
 
+resource "aws_db_subnet_group" "db_subnet_grp" {
+  name       = "db-subnet-grp-20942"
+  subnet_ids = ["${aws_subnet.vpc_private_sn_2.id}", "${aws_subnet.vpc_private_sn_3.id}"]
+
+  tags = {
+    Name = "db-subnet-grp-20942"
+  }
+}
+
+resource "aws_db_instance" "rds_mysql_instance" {
+    identifier           = "mysql-20942-instance"
+    allocated_storage    = 20
+    storage_type         = "gp2"
+    engine               = "mysql"
+    engine_version       = "5.7"
+    instance_class       = "db.t2.micro"
+    name                 = "mydb"
+    username             = "admin"
+    password             = "Dheeraj6898"
+    skip_final_snapshot  = "true"
+    parameter_group_name = "default.mysql5.7"
+    db_subnet_group_name = "${aws_db_subnet_group.db_subnet_grp.id}"
+    vpc_security_group_ids  = ["${aws_security_group.vpc_private_sg.id}"]
+}
+
+resource "aws_instance" "instance_20942_pub" {
+    ami                    = "ami-07ce44346a1d7354b"
+    instance_type          = "t2.micro"
+    subnet_id              = "${aws_subnet.vpc_public_sn.id}"
+    vpc_security_group_ids = ["${aws_security_group.vpc_private_sg.id}"]
+    key_name               = "dhairyasheel-20942-key-pair"
+    associate_public_ip_address = "true"
+    tags {
+        Name = "20942-pub-instance"
+    }
+}
+
+
+resource "aws_instance" "instance_20942_pri" {
+    ami                    = "ami-07ce44346a1d7354b"
+    instance_type          = "t2.micro"
+    subnet_id              = "${aws_subnet.vpc_private_sn_1.id}"
+    vpc_security_group_ids = ["${aws_security_group.vpc_private_sg.id}"]
+    key_name               = "dhairyasheel-20942-key-pair"
+    user_data              = <<-EOF
+                            #!/bin/bash
+                            mysql -h mysql-20942-instance.csaruqlxxway.us-east-1.rds.amazonaws.com -u admin -pDheeraj6898 mydb \
+                            -e "create table if not exists test(id int, name varchar(255)); 
+                            insert into test values (1, 'dhiraj'), (2, 'johndoe');"                   
+                            EOF
+    tags {
+        Name = "20942-pvt-instance"
+    }
+}
