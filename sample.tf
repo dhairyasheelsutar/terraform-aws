@@ -4,7 +4,7 @@ provider "aws" {
 }
 
 resource "aws_instance" "instance_20942_pub" {
-    ami                    = "ami-0bcc094591f354be2"
+    ami                    = "ami-0761dd91277e34178"
     instance_type          = "t2.micro"
     subnet_id              = "subnet-0783890f7bd7f6efb"
     vpc_security_group_ids = ["sg-0def65b68a4abd34d"]
