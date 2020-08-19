@@ -66,7 +66,7 @@ resource "aws_route_table_association" "vpc_public_sn_rt_assn" {
 }
 
 resource "aws_security_group" "vpc_private_sg" {
-  name = "sg-20942"
+  name = "sg_private_20942"
   description = "demo security group to access private ports"
   vpc_id = "${aws_vpc.vpc_name.id}"
 
@@ -96,6 +96,6 @@ resource "aws_security_group" "vpc_private_sg" {
       "0.0.0.0/0"]
   }
   tags {
-    Name = "sg-20942"
+    Name = "sg_private_20942"
   }
 }
