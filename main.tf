@@ -4,9 +4,11 @@
 # 4. Create internet gateway.
 # 5. Assign subnet to the above route table and attach internet gateway to it.
 # 6. Launch ec2 instance in public subnet.
-# 7. Launch ec2 instance in private subnet.
-# 8. Launch RDS instance in private subnet.
-# 9. Connect ec2 with RDS instance.
+# 7. Create a startup script which will install mysql in ec2 with public subnet.
+# 8. Create AMI of it.
+# 9. Use this ami to launch ec2 instance in private subnet.
+# 10. Create DB security group in the private subnet.
+# 11. Launch RDS instance in private subnet.
 
 # Setup our aws provider
 provider "aws" {
@@ -33,6 +35,7 @@ resource "aws_internet_gateway" "demo_ig" {
 resource "aws_subnet" "vpc_public_sn" {
     vpc_id = "${aws_vpc.vpc_name.id}"
     cidr_block = "20.0.1.0/24"
+    availability_zone = "us-east-1a"
     tags {
         Name = "pub-20942"
     }
@@ -42,6 +45,7 @@ resource "aws_subnet" "vpc_public_sn" {
 resource "aws_subnet" "vpc_private_sn_1" {
     vpc_id = "${aws_vpc.vpc_name.id}"
     cidr_block = "20.0.2.0/24"
+    availability_zone = "us-east-1b"
     tags {
         Name = "pvt-20942-1"
     }
@@ -51,6 +55,7 @@ resource "aws_subnet" "vpc_private_sn_1" {
 resource "aws_subnet" "vpc_private_sn_2" {
     vpc_id = "${aws_vpc.vpc_name.id}"
     cidr_block = "20.0.3.0/24"
+    availability_zone = "us-east-1c"
     tags {
         Name = "pvt-20942-2"
     }
