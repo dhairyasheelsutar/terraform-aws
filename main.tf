@@ -64,38 +64,3 @@ resource "aws_route_table_association" "vpc_public_sn_rt_assn" {
     subnet_id = "${aws_subnet.vpc_public_sn.id}"
     route_table_id = "${aws_route_table.vpc_public_sn_rt.id}"
 }
-
-resource "aws_security_group" "vpc_private_sg" {
-  name = "sg_private_20942"
-  description = "demo security group to access private ports"
-  vpc_id = "${aws_vpc.vpc_name.id}"
-
-  ingress {
-    from_port = 22
-    to_port = 22
-    protocol = "tcp"
-    cidr_blocks = [
-      "0.0.0.0/0"
-    ]
-  }
-
-  # allow mysql port within VPC
-  ingress {
-    from_port = 3306
-    to_port = 3306
-    protocol = "tcp"
-    cidr_blocks = [
-      "0.0.0.0/0"]
-  }
-
-  egress {
-    from_port = "0"
-    to_port = "0"
-    protocol = "-1"
-    cidr_blocks = [
-      "0.0.0.0/0"]
-  }
-  tags {
-    Name = "sg_private_20942"
-  }
-}
