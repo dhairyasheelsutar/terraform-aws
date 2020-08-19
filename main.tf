@@ -139,7 +139,7 @@ resource "aws_db_instance" "rds_mysql_instance" {
     username             = "admin"
     password             = "Dheeraj6898"
     skip_final_snapshot  = "true"
-    parameter_group_name = "default.mysql5.7"
+    parameter_group_name = ""
     db_subnet_group_name = "${aws_db_subnet_group.db_subnet_grp.id}"
     vpc_security_group_ids  = ["${aws_security_group.vpc_private_sg.id}"]
 }
