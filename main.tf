@@ -38,14 +38,22 @@ resource "aws_subnet" "vpc_public_sn" {
   }
 }
 
-# Private subnet
-resource "aws_subnet" "vpc_private_sn" {
+# Private subnet 1
+resource "aws_subnet" "vpc_private_sn_1" {
   vpc_id = "${aws_vpc.vpc_name.id}"
   cidr_block = "20.0.2.0/24"
   tags {
-    Name = "pvt-20942"
+    Name = "pvt-20942-1"
   }
 }
+
+# Private subnet 2
+resource "aws_subnet" "vpc_private_sn_2" {
+  vpc_id = "${aws_vpc.vpc_name.id}"
+  cidr_block = "20.0.3.0/24"
+  tags {
+    Name = "pvt-20942-2"
+  }
 
 # Routing table for public subnet
 resource "aws_route_table" "vpc_public_sn_rt" {
