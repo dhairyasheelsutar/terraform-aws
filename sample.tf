@@ -22,6 +22,10 @@ resource "aws_instance" "instance_20942_pri" {
     subnet_id              = "subnet-040b66e757e6ca460"
     vpc_security_group_ids = ["sg-0def65b68a4abd34d"]
     key_name               = "dhairyasheel-20942-key-pair"
+    user_data              = <<-EOF
+                             #!/bin/bash
+                             mysql -h terraform-20200819142543857200000001.csaruqlxxway.us-east-1.rds.amazonaws.com -u admin -p
+                            EOF
     tags {
         Name = "20942-pvt-instance"
     }
