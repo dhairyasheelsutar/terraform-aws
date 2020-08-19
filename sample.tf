@@ -10,8 +10,8 @@ resource "aws_instance" "instance_20942_pub" {
     vpc_security_group_ids = ["sg-0def65b68a4abd34d"]
     user_data              = <<-EOF
                             #!/bin/bash
-                            apt-get update -y
-                            apt-get install mysql-client -y
+                            yum update -y
+                            yum install mysql57 -y
                             EOF
     key_name               = "dhairyasheel-20942-key-pair"
     associate_public_ip_address = "true"
