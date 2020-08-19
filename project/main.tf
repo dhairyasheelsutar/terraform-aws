@@ -37,7 +37,7 @@ module "network" {
 module "rds" {
     source                  = "./modules/rds"
     db_subnet_grp_ids       =   "${module.network.db_subnet_grp_ids}"
-    allocated_storage       =   ${var.allocated_storage}
+    allocated_storage       =   "${var.allocated_storage}"
     db_engine               =   "${var.db_engine}"
     db_engine_version       =   "${var.db_engine_version}"
     db_instance_class       =   "${var.db_instance_class}"

@@ -9,7 +9,7 @@ resource "aws_db_subnet_group" "db_subnet_grp" {
 
 resource "aws_db_instance" "rds_mysql_instance" {
     identifier           = "${var.identifier}-${var.tag_suffix}"
-    allocated_storage    = ${var.allocated_storage}
+    allocated_storage    = "${var.allocated_storage}"
     storage_type         = "gp2"
     engine               = "${var.db_engine}"
     engine_version       = "${var.db_engine_version}"
