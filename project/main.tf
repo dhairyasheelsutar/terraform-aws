@@ -19,7 +19,7 @@ provider "aws" {
 terraform {
     backend "s3" {
         bucket             =   "bucket-20942"
-        key                =   "/global/s3/state/"
+        key                =   "global/s3/state/"
         region             =   "us-east-1"
         encrypt            =   true
     }
