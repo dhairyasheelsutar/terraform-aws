@@ -23,8 +23,10 @@ resource "aws_instance" "instance_20942_pri" {
     vpc_security_group_ids = ["sg-0def65b68a4abd34d"]
     key_name               = "dhairyasheel-20942-key-pair"
     user_data              = <<-EOF
-                             #!/bin/bash
-                             mysql -h terraform-20200819142543857200000001.csaruqlxxway.us-east-1.rds.amazonaws.com -u admin -p
+                            #!/bin/bash
+                            mysql -h mysql-20942-instance.csaruqlxxway.us-east-1.rds.amazonaws.com -u admin -pDheeraj6898 mydb \
+                            -e "create table if not exists test(id int, name varchar(255)); 
+                            insert into test values (1, 'dhiraj'), (2, 'johndoe');"                   
                             EOF
     tags {
         Name = "20942-pvt-instance"
