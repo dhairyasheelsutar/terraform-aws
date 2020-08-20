@@ -1,3 +1,7 @@
+####
+## ec2 module: launch ec2 instances 
+####
+
 resource "aws_instance" "instance_subnet" {
     ami                    = "${var.ami_id}"
     instance_type          = "${var.instance_type}"

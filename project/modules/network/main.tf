@@ -8,6 +8,10 @@
 # 6. Creating security groups 
 #####
 
+locals {
+    allow_from_everywhere = "0.0.0.0/0"
+}
+
 # Define a vpc
 resource "aws_vpc" "vpc_name" {
     cidr_block = "${var.vpc_cidr}"
@@ -71,7 +75,7 @@ resource "aws_subnet" "vpc_private_sn_3" {
 resource "aws_route_table" "vpc_public_sn_rt" {
     vpc_id = "${aws_vpc.vpc_name.id}"
     route {
-        cidr_block = "0.0.0.0/0"
+        cidr_block = "${local.allow_from_everywhere}"
         gateway_id = "${aws_internet_gateway.demo_ig.id}"
     }
     tags {
@@ -96,7 +100,7 @@ resource "aws_security_group" "vpc_private_sg" {
         from_port = 22
         to_port = 22
         protocol = "tcp"
-        cidr_blocks = ["0.0.0.0/0"]
+        cidr_blocks = ["${local.allow_from_everywhere}"]
     }
 
     # allow mysql port within VPC
@@ -111,7 +115,7 @@ resource "aws_security_group" "vpc_private_sg" {
         from_port = "0"
         to_port = "0"
         protocol = "-1"
-        cidr_blocks = ["0.0.0.0/0"]
+        cidr_blocks = ["${local.allow_from_everywhere}"]
     }
     tags {
         Name = "${var.sg_group_name}"

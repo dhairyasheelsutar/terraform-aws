@@ -25,6 +25,7 @@ terraform {
     }
 }
 
+# Network module which creates vpc, subnets, route tables and security group
 module "network" {
     source                  =   "./modules/network"
     vpc_cidr                =   "${var.vpc_cidr}"
@@ -35,6 +36,7 @@ module "network" {
     tag_suffix              =   "${var.tag_suffix}"
 }
 
+# Rds module launches rds instance
 module "rds" {
     source                  = "./modules/rds"
     db_subnet_grp_ids       =   "${module.network.db_subnet_grp_ids}"
@@ -51,6 +53,7 @@ module "rds" {
     tag_suffix              =   "${var.tag_suffix}"
 }
 
+# Instance in public instance
 module "public_insance" {
     source                  =   "./modules/ec2"
     ami_id                  =   "${var.ami_id}"
@@ -61,6 +64,7 @@ module "public_insance" {
     instance_name           =   "${var.instance_name_pub}"
 }
 
+# Instance in private instance
 module "private_instance" {
     source                  =   "./modules/ec2"
     tag_suffix              =   "${var.tag_suffix}"

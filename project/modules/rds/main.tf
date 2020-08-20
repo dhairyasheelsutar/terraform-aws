@@ -1,3 +1,8 @@
+#####
+## Rds module
+#####
+
+## subnet_ids passed as string so need to convert them into list
 resource "aws_db_subnet_group" "db_subnet_grp" {
   name       = "${var.db_subnet_grp}-${var.tag_suffix}"
   subnet_ids = ["${split(";", var.db_subnet_grp_ids)}"]
