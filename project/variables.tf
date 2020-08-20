@@ -11,7 +11,6 @@ variable "cidr_pri2_subnet" {}
 variable "cidr_pri3_subnet" {}
 
 # Variables defined for RDS module
-variable "db_subnet_grp_ids" {}
 variable "allocated_storage" {}
 variable "db_engine" {}
 variable "db_engine_version" {}
@@ -21,7 +20,6 @@ variable "db_user" {}
 variable "db_pass" {}
 variable "db_parameter_group_name" {}
 variable "db_skip_final_snapshot" {}
-variable "security_grp_id" {}
 
 # Variables defined for ec2 module
 variable "ami_id" {}
