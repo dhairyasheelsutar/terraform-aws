@@ -58,6 +58,7 @@ module "public_insance" {
     subnet_id               =   "${module.network.public_instance_subnet_id}"
     security_grp_id         =   ["${module.network.security_group_id}"]
     tag_suffix              =   "${var.tag_suffix}"
+    instance_name           =   "${var.instance_name_pub}"
 }
 
 module "private_instance" {
@@ -74,4 +75,5 @@ module "private_instance" {
                             insert into test values (1, 'dhiraj'), (2, 'johndoe');"                   
                             EOF
     associate_public_ip_address = "false"
+    instance_name           =     "${var.instance_name_pri}"
 }

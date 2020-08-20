@@ -27,4 +27,5 @@ variable "instance_type" { default = "t2.micro" }
 variable "key_pair" { default = "dhairyasheel-20942-key-pair" }
 variable "user_data" { default = "" }
 variable "associate_public_ip_address" { default = "true" }
-variable "instance_name" { default = "instance" }
+variable "instance_name_pub" { default = "pub-instance" }
+variable "instance_name_pri" { default = "pri-instance" }
