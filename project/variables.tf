@@ -1,8 +1,6 @@
 ### Variables for main file
 
 variable "region" { default = "us-east-1" }
-variable "bucket_name" {}
-variable "bucket_key_path" {}
 variable "tag_suffix" {}
 
 # Variables defined for network module
