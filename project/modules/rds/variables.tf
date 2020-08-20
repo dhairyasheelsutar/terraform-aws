@@ -5,7 +5,7 @@
 # Variables for creating db subnet group
 variable tag_suffix {}
 variable db_subnet_grp { default = "db-subnet-grp" }
-variable db_subnet_grp_ids { type = "list" }
+variable db_subnet_grp_ids {}
 
 # Variables for launching RDS instance.
 variable identifier { default = "rds-db" }
