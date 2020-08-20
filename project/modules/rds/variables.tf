@@ -18,4 +18,4 @@ variable db_user {}
 variable db_pass {}
 variable db_skip_final_snapshot { default = "false" }
 variable db_parameter_group_name {}
-variable security_grp_id {}
+variable security_grp_id { type = "list" }
