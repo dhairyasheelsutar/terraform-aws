@@ -1,6 +1,6 @@
 resource "aws_db_subnet_group" "db_subnet_grp" {
   name       = "${var.db_subnet_grp}-${var.tag_suffix}"
-  subnet_ids = ["${split(';', var.db_subnet_grp_ids)}"]
+  subnet_ids = ["${split(";", var.db_subnet_grp_ids)}"]
 
   tags = {
     Name = "${var.db_subnet_grp}-${var.tag_suffix}"
