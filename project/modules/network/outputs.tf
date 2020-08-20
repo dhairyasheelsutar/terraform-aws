@@ -10,10 +10,7 @@ output "vpc_id" {
 }
 
 output "db_subnet_grp_ids" {
-    value = [
-        "${aws_subnet.vpc_private_sn_2.id}",
-        "${aws_subnet.vpc_private_sn_3.id}"
-    ]
+    value = "${aws_subnet.vpc_private_sn_2.id};${aws_subnet.vpc_private_sn_3.id}"
 }
 
 output "public_instance_subnet_id" {

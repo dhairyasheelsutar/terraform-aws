@@ -1,6 +1,6 @@
 resource "aws_db_subnet_group" "db_subnet_grp" {
   name       = "${var.db_subnet_grp}-${var.tag_suffix}"
-  subnet_ids = "${var.db_subnet_grp_ids}"
+  subnet_ids = ["${split(';', var.db_subnet_grp_ids)}"]
 
   tags = {
     Name = "${var.db_subnet_grp}-${var.tag_suffix}"
@@ -20,5 +20,5 @@ resource "aws_db_instance" "rds_mysql_instance" {
     skip_final_snapshot  = "${var.db_skip_final_snapshot}"
     parameter_group_name = "${var.db_parameter_group_name}"
     db_subnet_group_name = "${aws_db_subnet_group.db_subnet_grp.id}"
-    vpc_security_group_ids  = "${var.security_grp_id}"
+    vpc_security_group_ids  = ["${var.security_grp_id}"]
 }
