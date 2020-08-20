@@ -3,7 +3,7 @@
 variable "region" { default = "us-east-1" }
 variable "bucket_name" {}
 variable "bucket_key_path" {}
-variable "tag_suffix" { default = "20942" }
+variable "tag_suffix" {}
 
 # Variables defined for network module
 variable "vpc_cidr" {}
@@ -22,13 +22,13 @@ variable "db_name" {}
 variable "db_user" {}
 variable "db_pass" {}
 variable "db_parameter_group_name" {}
+variable "db_skip_final_snapshot" {}
 variable "security_grp_id" {}
 
 # Variables defined for ec2 module
 variable "ami_id" {}
 variable "instance_type" { default = "t2.micro" }
 variable "subnet_id" {}
-variable "security_grp_id" {}
 variable "key_pair" { default = "dhairyasheel-20942-key-pair" }
 variable "user_data" { default = "" }
 variable "associate_public_ip_address" { default = "true" }

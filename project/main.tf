@@ -51,6 +51,7 @@ module "rds" {
 
 module "public_insance" {
     source                  =   "./modules/ec2"
+    ami_id                  =   "${var.ami_id}"
     instance_type           =   "${var.instance_type}"
     subnet_id               =   "${var.subnet_id}"
     security_grp_id         =   ["${module.network.security_group_id}"]
@@ -58,6 +59,7 @@ module "public_insance" {
 
 module "private_instance" {
     source                  =   "./modules/ec2"
+    ami_id                  =   "${var.ami_id}"
     instance_type           =   "${var.instance_type}"
     subnet_id               =   "${var.subnet_id}"
     security_grp_id         =   ["${module.network.security_group_id}"]
