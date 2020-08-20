@@ -32,6 +32,7 @@ module "network" {
     cidr_pri1_subnet        =   "${var.cidr_pri1_subnet}"
     cidr_pri2_subnet        =   "${var.cidr_pri2_subnet}"
     cidr_pri3_subnet        =   "${var.cidr_pri3_subnet}"
+    tag_suffix              =   "${var.tag_suffix}"
 }
 
 module "rds" {
@@ -47,6 +48,7 @@ module "rds" {
     db_skip_final_snapshot  =   "${var.db_skip_final_snapshot}"
     db_parameter_group_name =   "${var.db_parameter_group_name}"
     security_grp_id         =   ["${module.network.security_group_id}"]
+    tag_suffix              =   "${var.tag_suffix}"
 }
 
 module "public_insance" {
@@ -55,10 +57,12 @@ module "public_insance" {
     instance_type           =   "${var.instance_type}"
     subnet_id               =   "${var.subnet_id}"
     security_grp_id         =   ["${module.network.security_group_id}"]
+    tag_suffix              =   "${var.tag_suffix}"
 }
 
 module "private_instance" {
     source                  =   "./modules/ec2"
+    tag_suffix              =   "${var.tag_suffix}"
     ami_id                  =   "${var.ami_id}"
     instance_type           =   "${var.instance_type}"
     subnet_id               =   "${var.subnet_id}"
