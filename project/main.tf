@@ -55,7 +55,7 @@ module "public_insance" {
     source                  =   "./modules/ec2"
     ami_id                  =   "${var.ami_id}"
     instance_type           =   "${var.instance_type}"
-    subnet_id               =   "${var.subnet_id}"
+    subnet_id               =   "${module.network.public_instance_subnet_id}"
     security_grp_id         =   ["${module.network.security_group_id}"]
     tag_suffix              =   "${var.tag_suffix}"
 }
@@ -65,7 +65,7 @@ module "private_instance" {
     tag_suffix              =   "${var.tag_suffix}"
     ami_id                  =   "${var.ami_id}"
     instance_type           =   "${var.instance_type}"
-    subnet_id               =   "${var.subnet_id}"
+    subnet_id               =   "${module.network.private_instance_subnet_id}"
     security_grp_id         =   ["${module.network.security_group_id}"]
     user_data               =   <<-EOF
                             #!/bin/bash
